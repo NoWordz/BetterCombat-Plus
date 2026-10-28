@@ -4,7 +4,7 @@ An **unofficial** addon for [Better Combat](https://modrinth.com/mod/better-comb
 [Combat Roll](https://modrinth.com/mod/combat-roll).
 Minecraft **1.20.1** · **Forge** · Java 17 · **GPL-3.0**
 
-By **E33EPUS & NoWordz**. Not affiliated with, or endorsed by, the authors of Better Combat or Combat Roll.
+Not affiliated with, or endorsed by, the authors of Better Combat or Combat Roll.
 
 ## What it fixes
 
