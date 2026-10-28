@@ -1,0 +1,140 @@
+plugins {
+    id 'eclipse'
+    id 'idea'
+    id 'net.minecraftforge.gradle' version '[6.0,6.2)'
+    id 'org.spongepowered.mixin' version '0.7.+'
+}
+
+version = mod_version
+group = mod_group_id
+
+base {
+    archivesName = "${mod_id}-Forge-${minecraft_version}"
+}
+
+// Forge 1.20.1 runs on Java 17.
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+
+minecraft {
+    mappings channel: mapping_channel, version: mapping_version
+
+    runs {
+        configureEach {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+            mods {
+                "${mod_id}" {
+                    source sourceSets.main
+                }
+            }
+        }
+        client {
+        }
+        server {
+            args '--nogui'
+        }
+    }
+}
+
+mixin {
+    add sourceSets.main, "${mod_id}.mixins.refmap.json"
+    config "${mod_id}.mixins.json"
+}
+
+repositories {
+    mavenCentral()
+    // China mirrors last: fallback for local builds, canonical repos resolve first
+    maven {
+        url 'https://mirrors.cloud.tencent.com/nexus/repository/maven-public/'
+        allowInsecureProtocol = true
+    }
+    maven {
+        url 'https://maven.aliyun.com/repository/public/'
+        allowInsecureProtocol = true
+    }
+}
+
+dependencies {
+    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+    compileOnly "org.spongepowered:mixin:0.8.5"
+
+    // 编译期只看不打包：三个前置在运行时由整合包提供（见 mods.toml 的依赖声明）。
+    // Better Combat 与 Cloth Config 是发布版 SRG jar，签名类型与我们一致，可直接 compileOnly。
+    compileOnly files('libs/bettercombat-forge-1.9.0+1.20.1.jar')
+    compileOnly files('libs/cloth-config-11.1.136-forge.jar')
+    // Combat Roll 是软依赖：mixin 由 BcpMixinPlugin 在类存在时才应用。
+    compileOnly files('libs/combatroll-forge-1.3.3+1.20.1.jar')
+}
+
+tasks.named('processResources', ProcessResources).configure {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    filteringCharset = 'UTF-8'
+    var replaceProperties = [
+            minecraft_version      : minecraft_version,
+            minecraft_version_range: minecraft_version_range,
+            forge_version          : forge_version,
+            forge_version_range    : forge_version_range,
+            loader_version_range   : loader_version_range,
+            mod_id                 : mod_id,
+            mod_name               : mod_name,
+            mod_license            : mod_license,
+            mod_version            : mod_version,
+            mod_authors            : mod_authors,
+            mod_description        : mod_description,
+    ]
+    inputs.properties replaceProperties
+    filesMatching(['META-INF/mods.toml', 'pack.mcmeta']) {
+        expand replaceProperties
+    }
+}
+
+tasks.named('jar', Jar).configure {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    // GPL-3.0 要求随二进制分发许可证；NOTICE 说明上游关系与复用出处。
+    from('LICENSE') { into 'META-INF' }
+    from('NOTICE.md') { into 'META-INF' }
+    manifest {
+        attributes([
+                'Specification-Title'     : mod_id,
+                'Specification-Vendor'    : mod_authors,
+                'Specification-Version'   : '1',
+                'Implementation-Title'    : project.name,
+                'Implementation-Version'  : project.jar.archiveVersion,
+                'Implementation-Vendor'   : mod_authors,
+                'Implementation-Timestamp': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
+                'MixinConfigs'            : "${mod_id}.mixins.json"
+        ])
+    }
+    finalizedBy 'reobfJar'
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+// Mixin AP 的 refmap 不在 compileJava 的默认输出契约里：构建缓存命中时 AP 不跑、
+// 缓存也不恢复该文件 → 正式版 mixin 找不到目标而全部失效（sweatyfeet 曾因此崩服）。
+// 两个可能的名字都声明为产出，并在拷贝后置检查，缺了就响失败，绝不产出裸 jar。
+tasks.named('compileJava', JavaCompile).configure {
+    outputs.file "${buildDir}/tmp/compileJava/compileJava-refmap.json"
+    outputs.file "${buildDir}/tmp/compileJava/${mod_id}.mixins.refmap.json"
+}
+
+tasks.register('copyRefmap', Copy) {
+    from "${buildDir}/tmp/compileJava"
+    into "${buildDir}/resources/main"
+    include 'compileJava-refmap.json', "${mod_id}.mixins.refmap.json"
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    rename { "${mod_id}.mixins.refmap.json" }
+    doLast {
+        if (!file("${buildDir}/resources/main/${mod_id}.mixins.refmap.json").exists()) {
+            throw new GradleException("${mod_id}.mixins.refmap.json missing after copyRefmap — mixin AP produced no refmap")
+        }
+    }
+}
+compileJava.finalizedBy 'copyRefmap'
+jar.dependsOn copyRefmap
