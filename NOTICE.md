@@ -1,5 +1,7 @@
 # NOTICE
 
+Copyright (c) 2026 E33EPUS & NoWordz.
+
 本项目以 GPL-3.0 发布，见 [LICENSE](LICENSE)。
 
 ## 上游关系
@@ -12,8 +14,8 @@ Copyright (c) 2022 Zsolt Molnár — https://github.com/ZsoltMolnarrr/BetterComb
 
 - 调用其公开 API：`net.bettercombat.api.MinecraftClient_BetterCombat`、
   `net.bettercombat.api.WeaponAttributes`、`net.bettercombat.logic.WeaponRegistry`；
-- 在其 mixin 目标方法上以更高优先级抢先注入（`Player.getItemBySlot`、`Minecraft.startUseItem`），
-  运行期改变行为而不修改、不复制其类。
+- 在其 mixin 目标方法上以更高优先级抢先注入（`Player.getItemBySlot`、`Minecraft.handleKeybinds`、
+  `Minecraft.tick`），运行期改变行为而不修改、不复制其类。
 
 ### Combat Roll — GPL-3.0
 
