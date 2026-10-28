@@ -58,3 +58,12 @@
 - 依赖版本范围收紧到实际验证过的区间：BC `[1.9.0,1.10)`、CR `[1.3.3,1.4)`。
 - 补 `en_us` / `zh_cn` 语言文件，配置界面不再显示裸 key。
 - jar 内打包 LICENSE 与 NOTICE；`libs/` 加入 gitignore（BC 为 All Rights Reserved，不随仓库分发）。
+
+### 修复 0.1.1 候选（资源包）
+
+- 补 `pack.mcmeta`：之前 jar 里有 `assets/` 却没有包元数据，Forge 报
+  `Missing metadata in pack mod:bettercombatplus`，整个资源包不被加载，
+  语言文件随之失效，配置界面三个开关全部显示成
+  `text.autoconfig.bettercombatplus.option.xxx` 裸键名。
+  一个文件同时修掉「资源包警告」和「配置界面裸键名」。
+- 补 `logo.png` 与 `logoFile`，消除 Mod Menu 的 `broken icon` 警告。
