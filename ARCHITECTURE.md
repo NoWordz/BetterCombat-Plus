@@ -61,15 +61,47 @@ Mixin 官方对 `@Mixin.priority` 的定义是「lower priority mixins being app
 **根因是两层**：
 
 1. BC 起手时把原版私有的 `rightClickDelay` 写成整段武器冷却，而原版 `handleKeybinds` 只在
-   它为 0 时才调 `startUseItem()` → 整个后摇期右键路径根本不会被执行到；
+   它为 0 时才调 `startUseItem()` → 后摇前段右键路径根本不会被执行到；
+   （后摇尾段 `rightClickDelay` 会先归零而攻击进度仍 < 1，那几 tick 原版路径是通的。）
 2. 即使走到，BC 又在 `startUseItem` 的 HEAD 按「起手未结束 / 冷却进度不足」直接取消。
 
 **修法**：`MinecraftRecoveryUseMixin` 在 `tick` 的 TAIL 自行判断并派发：
 起手已结束（`upswingTicks == 0`）、冷却未满（`getAttackStrengthScale(0) < 1`）、
-副手握着盾、界面/遮罩未打开、未暂停、不在挖方块、任意一只手不在使用物品 ——
+副手握着盾、界面/遮罩未打开、未暂停、不在挖方块、未划船、任意一只手不在使用物品 ——
 满足则调 `gameMode.useItem(player, OFF_HAND)`。
-该方法是公开的，自己会发 `ServerboundUseItemPacket` 并在本地执行 `ItemStack.use`，
-盾牌立刻进入格挡状态。蓄力期不介入，攻击手感不变。
+该方法是公开的，自己会发 `ServerboundUseItemPacket` 并在本地执行 `ItemStack.use`
+（已用字节码核实）。注意 `LivingEntity.isBlocking()` 还要求使用已持续 5 tick，
+所以是按住几 tick 才真正格挡，不是按下即格挡。蓄力期不介入，攻击手感不变。
+
+「是不是盾」认三种信号，任一成立即可，覆盖原版盾与模组盾：
+
+| 判据 | 覆盖范围 | 核实依据 |
+|---|---|---|
+| `canPerformAction(ToolActions.SHIELD_BLOCK)` | 能真正格挡的物品，功能判据 | `LivingEntity.isBlocking()` 用的正是这条；`IForgeItem.canPerformAction` 默认 `false`，`ShieldItem` 覆盖为 `DEFAULT_SHIELD_ACTIONS.contains(...)` |
+| `instanceof ShieldItem` | 原版盾，及覆写了能力判据的子类 | `ShieldItem` 类层级 |
+| `is(Tags.Items.TOOLS_SHIELDS)` | 挂了 `#forge:tools/shields` 的模组盾 | forge universal jar 内 `data/forge/tags/items/tools/shields.json`（值含 `minecraft:shield`）；`Tags.Items.tag()` 内部固定 `forge` 命名空间 |
+
+> 标签这条严格说比能力判据弱（挂标签但没实现能力的物品，服务端 `isBlocking()` 也不认），
+> 保留是因为「有盾牌标签就该能举」是对外承诺的语义 —— 模组作者按标签声明时不该被要求改代码。
+
+> **刻意不用 `getUseAnimation() == UseAnim.BLOCK`。** 使用动画是纯表现层，和能不能格挡无关。
+> 反例就在本机整合包里：Simply Swords 的 `RunicSwordItem.m_6164_` 只有一行
+> `getstatic UseAnim.BLOCK; areturn`，无条件返回格挡动画，却没有任何 `SHIELD_BLOCK` 能力。
+> 用它当判据会让副手的符文剑被每 tick 派发 `use()`（它的 `use()` 不调 `startUsingItem`，
+> 所以 `isUsingItem()` 守卫也拦不住），触发投掷与 `hurt(1)`。
+
+对应地还补了几处与原版对齐的行为：
+
+- 盾牌被破防后有 100 tick 物品冷却。冷却中 `gameMode.useItem` 的预测 lambda
+  （`MultiPlayerGameMode.lambda$useItem$5`）在 `isOnCooldown` 为真时直接 `setValue(PASS)`
+  并返回、**不调 `ItemStack.use`**，但网络包照样发出；所以提前用
+  `player.getCooldowns().isOnCooldown(...)` 拦掉，别白发。
+- 派发节流到每 4 tick 最多一次，对齐原版 `startUseItem` 把 `rightClickDelay` 写成 4 的节奏。
+  计数用自减字段而不是比对 `player.tickCount`：后者在换世界/重生时归零，跨世界比对会得负差值、
+  节流整局失效。
+- 成功派发后只有 `shouldSwing()` 为真才挥手臂（原版举盾不挥手），并调
+  `gameRenderer.itemInHandRenderer.itemUsed(OFF_HAND)` 重置手上动画 —— 这与原版
+  `startUseItem` 使用物品那条分支完全同构。
 
 > 守卫为什么这么多：这是每 tick 运行的注入。少一个就会在非攻击场景误触发。
 > 特别是「任意一只手在使用物品」——主手吃东西/拉弓时若继续派发，`ShieldItem.use`
@@ -95,8 +127,14 @@ com.e33epus.bcp
 ## 四、依赖与前置
 
 - **硬依赖**：Better Combat（行为主体）、Cloth Config（配置界面）。
-  Forge 1.20.1 没有自动配置界面（`ConfigurationScreen` 是 1.20.2+ 才有），
+  Forge 1.20.1 没有**自动生成**配置界面（`ConfigurationScreen` 是 1.20.2+ 才有），
   所以和上游一样借 Cloth Config 生成，不手写 GUI。
+- **配置界面入口**：不需要任何入口 mod。Forge 打补丁后的 `TitleScreen` 自己建了
+  `fml.menu.mods` 按钮（`TitleScreen.lambda$init$1` → `new ModListScreen(this)`），
+  `ModListScreen.updateCache()` 用 `ConfigScreenHandler.getScreenFactoryFor(modInfo).isPresent()`
+  决定 Config 按钮是否可点。我们注册的 `ConfigScreenHandler.ConfigScreenFactory`
+  落在本 mod 自己的 `ModContainer.extensionPoints` 里（`ModLoadingContext.registerExtensionPoint`
+  → `getActiveContainer().registerExtensionPoint`），所以主菜单 Mods 里选中本 mod 即可打开。
 - **软依赖**：Combat Roll。没装时 `BcpMixinPlugin` 让 `MinecraftRollMixin` 整体不应用
   （用 `Class.forName` 探类，避免类加载期 `NoClassDefFoundError`），其余两项修复照常工作。
 - **部署面**：设计为双端都装。不做握手，也不写网络包。
@@ -105,7 +143,8 @@ com.e33epus.bcp
 
 - `./gradlew build` 通过；refmap 三个 SRG 目标已与 MCP 映射表、BC/CR 各自 refmap 交叉核对。
 - 产物部署至 `D:/Myworld/.minecraft/versions/1.20.1-main/mods`，哈希比对一致。
-- 实机验收需人工确认三项：双手武器时盾牌可见、后摇期右键能架盾、攻击动作中能翻滚。
+- 实机验收已通过：双手武器时盾牌可见、后摇期右键能架盾、攻击动作中能翻滚；
+  配置界面文字正常（`pack.mcmeta` 修好后语言文件加载）。
 
 ## 六、已知边界
 
@@ -115,6 +154,15 @@ com.e33epus.bcp
   `speed = animation.endTick / length`），**不在 v1 范围**。
 - `offhand_while_two_handed` 是双端各自读本地配置，**两端必须一致**。服务端关而客户端开时，
   客户端会把盾举起来、服务端不认，表现为"看着在格挡、实际没挡"。
-- 后摇举盾走的是自己派发，绕过了 Forge 的 `InputEvent.InteractionKeyMappingTriggered`
-  （`ForgeHooks.onItemRightClick` 仍在链上）。依赖该事件做右键拦截的权限/防误触 mod 会失效。
-- 同一条路径也没调 `itemUsed`，盾牌"举起的装备动画"不播，只有手臂挥动。
+- 后摇举盾走的是自己派发，绕过了 Forge 的 `InputEvent.InteractionKeyMappingTriggered`、
+  `LocalPlayer.isHandsBusy()` 与 `ItemStack.isItemEnabled()` 这三道 `startUseItem` 内的安全门
+  （前者自己补了 `isHandsBusy` 判断，后两者未补）。依赖 `InteractionKeyMappingTriggered`
+  做右键拦截的权限/防误触 mod 在本路径上会失效。
+- 本 mixin 在 TAIL 派发，而原版 `startUseItem` 在同一 tick 的 `handleKeybinds` 里先跑。
+  后摇尾段（BC 写的 `rightClickDelay` 已归零、但攻击进度仍 < 1）原版路径是通的，
+  此时若主手物品消费了这次点击，本 mixin 仍会再派发一次副手 —— 表现为同一 tick 多发一个
+  `ServerboundUseItemPacket`，不会双倍物品（只用 OFF_HAND），第二次也会被 `isUsingItem()` 挡掉。
+- 后摇前段只派发副手，所以这段窗口里主手拿末影珍珠/雪球/喷溅药水时这些物品用不出来。
+  这不是本 mod 引入的回退：那段窗口 BC 本来就把 `rightClickDelay` 钉住，原版右键路径不执行，
+  区别只是「以前什么都不发生」变成「现在举盾」。
+- 派发后 `LivingEntity.isBlocking()` 还要求使用已持续 5 tick，所以不是按下即格挡。

@@ -24,19 +24,25 @@ Minecraft **1.20.1** · **Forge** · Java 17 · **GPL-3.0**
 
 | mod | 关系 |
 |---|---|
-| Better Combat | **必需** `[1.8.0,)` |
+| Better Combat | **必需** `[1.9.0,1.10)` |
 | Cloth Config | **必需** `[11,)`（提供配置界面） |
-| Combat Roll | **可选** `[1.3.0,)`；不装则不启用「攻击中翻滚」，其余两项照常 |
+| Combat Roll | **可选** `[1.3.3,1.4)`；不装则不启用「攻击中翻滚」，其余两项照常 |
 
 **双端都要装**。副手放行是 common mixin，客户端和服务端各跑一半；只装单端会出现「看着能格挡、实际不挡」。
 
 ## 配置
 
-游戏内 **Mods → Better Combat Plus → Config**（Cloth Config 生成），三个开关默认全开：
+游戏内 **主菜单 → Mods → 选中 Better Combat Plus → Config**，三个开关默认全开。
+Forge 自己在主菜单留了 Mods 入口并托管右上角的 Config 按钮，**不需要装 Mod Menu 之类的入口 mod**：
 
 - `roll_during_attack` — 攻击动作中允许翻滚
 - `offhand_while_two_handed` — 双手武器时保留副手
 - `right_click_in_recovery` — 后摇期允许右键举盾
+
+副手「算不算盾」认三种信号，任一成立即可：继承 `ShieldItem`、带 `#forge:tools/shields` 标签、
+或声明了 Forge 的 `SHIELD_BLOCK` 能力（`canPerformAction`，`LivingEntity.isBlocking()` 用的就是这条）。
+模组自己加的盾牌只要挂了标签或实现了这个能力，不用改本 mod 就能举。
+（1.20.1 原版没有 `minecraft:shields` 物品标签，标签侧只有 `#forge:tools/shields` 这一条通用路径。）
 
 `offhand_while_two_handed` 是**双端各自读本地配置**，两端必须一致：
 服务端关而客户端开时，客户端会把盾举起来、服务端不认，表现为"看着在格挡、实际没挡"。
