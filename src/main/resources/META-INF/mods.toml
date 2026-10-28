@@ -1,0 +1,48 @@
+modLoader="javafml"
+loaderVersion="${loader_version_range}"
+license="${mod_license}"
+
+[[mods]]
+modId="${mod_id}"
+version="${mod_version}"
+displayName="${mod_name}"
+authors="${mod_authors}"
+description='''${mod_description}'''
+
+[[dependencies.${mod_id}]]
+    modId="forge"
+    mandatory=true
+    versionRange="${forge_version_range}"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.${mod_id}]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="${minecraft_version_range}"
+    ordering="NONE"
+    side="BOTH"
+
+# Better Combat 是硬依赖：两个副作用修复都建立在它的双手武器与起手/后摇状态之上。
+[[dependencies.${mod_id}]]
+    modId="bettercombat"
+    mandatory=true
+    versionRange="[1.9.0,1.10)"
+    ordering="AFTER"
+    side="BOTH"
+
+# Cloth Config 提供配置界面（上游 Better Combat 同样依赖它），手写配置界面没有必要。
+[[dependencies.${mod_id}]]
+    modId="cloth_config"
+    mandatory=true
+    versionRange="[11,)"
+    ordering="AFTER"
+    side="BOTH"
+
+# Combat Roll 是软依赖：只在装了它时才启用「攻击中翻滚」接管，没装时其余修复照常工作。
+[[dependencies.${mod_id}]]
+    modId="combatroll"
+    mandatory=false
+    versionRange="[1.3.3,1.4)"
+    ordering="AFTER"
+    side="BOTH"

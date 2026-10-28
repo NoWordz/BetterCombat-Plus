@@ -1,0 +1,101 @@
+3d2271f7d9d2e32fca46d19f3b6ab4372d30e0ea3eb26c809c23366e8d503e16 */d/Myworld/.minecraft/versions/1.20.1-main/mods/CreativeCore_FORGE_v2.12.32_mc1.20.1.jar
+d417c736c0c113df3f8a3607ff27e059f44de5d092cfd45ff360bdc8bee9a2df */d/Myworld/.minecraft/versions/1.20.1-main/mods/CustomSkinLoader_ForgeV2-14.25.jar
+5a2515cc70b27e7aa536c5c8ae570d396f68dc6ebac305f8679fb12036acfa2f */d/Myworld/.minecraft/versions/1.20.1-main/mods/Female-Gender-Mod-forge-1.20.1-3.1.jar
+e42a8b513da08a910c133caeafad9fc2fcc22fdaaa2eb3e2516e9112a5a0db61 */d/Myworld/.minecraft/versions/1.20.1-main/mods/GlitchCore-forge-1.20.1-0.0.1.1.jar
+da781a31b2c8d8a845ed48c89b6463f1df3f2c655de10d8d4f5bed8123ff68a8 */d/Myworld/.minecraft/versions/1.20.1-main/mods/ImmediatelyFast-Forge-1.5.4+1.20.4.jar
+7295ae6681b178ed633e951b1f4478d15b2ed7b13836038caf7d3c9427fff1ff */d/Myworld/.minecraft/versions/1.20.1-main/mods/ImmersiveUI-FORGE-0.3.0.jar
+520c07bceb8987c4bb355d32b495ae03e4f106553df47b1a9691a08420016fa2 */d/Myworld/.minecraft/versions/1.20.1-main/mods/MRU-1.0.4+1.20.1+forge.jar
+5bb146c691f2c5054752f006a61aab6335ecb1cd9718a9643733de5367971047 */d/Myworld/.minecraft/versions/1.20.1-main/mods/OctoLib-FORGE-0.5.0.1+1.20.1.jar
+1cdf906cfbcbb5e5be2ef1bb721f79a24b01bd2ac559c8cdbfb7693f62421571 */d/Myworld/.minecraft/versions/1.20.1-main/mods/Placebo-1.20.1-8.6.3.jar
+b1a576f920faeb2175f693e3ee7ba9e5ff0bcf0e404da29f1824ea3c66efd240 */d/Myworld/.minecraft/versions/1.20.1-main/mods/Prism-1.20.1-forge-1.0.5.jar
+614741d2c4eeac0f01ceba8e6d0bbd134e2a501edf93a958da78e700933a8490 */d/Myworld/.minecraft/versions/1.20.1-main/mods/PuzzlesLib-v8.1.32-1.20.1-Forge.jar
+2fa22c59f967e963c97e7d4374a8713247402fa6c87654b3057a1c248217c7fd */d/Myworld/.minecraft/versions/1.20.1-main/mods/Sounds-2.2.1+1.20.1+forge.jar
+9efce309f2d51adc15be25ac531adcfd43d08069d17bc6ea1efce16ea19e8b8f */d/Myworld/.minecraft/versions/1.20.1-main/mods/SubtleEffects-forge-1.20.1-1.11.0.jar
+cd1786902a79434f8fd762d741019d9c8a79725fef7e30a89c153c934e1e6a9e */d/Myworld/.minecraft/versions/1.20.1-main/mods/Zeta-1.0-31.jar
+6229ea6e5d77dd1f66d21163bf3187abb899d59f508dae63ab67ecbb0f804cc5 */d/Myworld/.minecraft/versions/1.20.1-main/mods/[3D 皮肤层] skinlayers3d-forge-1.11.3-mc1.20.1.jar
+b1cb4d82ea9f137a87e12a7aaf3329619294b56f7d70337dfd557a76e10b6e07 */d/Myworld/.minecraft/versions/1.20.1-main/mods/[FTB 团队] ftb-teams-forge-2001.3.2.jar
+2d3a86f503dbde51afa5142951525c37e227016ce8d9e7dfd10bbdd9233f0204 */d/Myworld/.minecraft/versions/1.20.1-main/mods/[JEI物品管理器] jei-1.20.1-forge-15.20.0.112.jar
+43876b65c1b79992104a21ce1347a9ee455f23950d81dd448ccf8e218169ac86 */d/Myworld/.minecraft/versions/1.20.1-main/mods/[Leawind 的第三人称] leawind_third_person-v2.2.0-mc1.20-1.20.1-forge.jar
+a44d4b232e906ecdbbddafec5b9edc2c9a1dc8a8fa7d7ea0782f0a694eb9d21a */d/Myworld/.minecraft/versions/1.20.1-main/mods/[MrCrayfish 的家具：重制] refurbished_furniture-forge-1.20.1-1.0.14.jar
+bd70e7d7dfd720f15fbd4b1ca7e6b2617d4c51a3c5105d53aab0d96b07cbf59f */d/Myworld/.minecraft/versions/1.20.1-main/mods/[Xaero的世界地图] xaeroworldmap-forge-1.20.1-1.42.0.jar
+67b3ccfe92280ed5ee9e58207da47a73fe452aef4295239b6430c292b74039b9 */d/Myworld/.minecraft/versions/1.20.1-main/mods/[Xaero的小地图] xaerominimap-forge-1.20.1-26.2.0.jar
+9a2db05541f07e15a81d514f4f47627f1c738d0464c1885765aa460117909318 */d/Myworld/.minecraft/versions/1.20.1-main/mods/[农夫乐事] FarmersDelight-1.20.1-1.2.11.jar
+91ad6b459e0c7a16a9f3dc90230248a696600ceec6646aa23263559b8648dbc3 */d/Myworld/.minecraft/versions/1.20.1-main/mods/[冰山] Iceberg-1.20.1-forge-1.1.25.jar
+be89c67538440573871f3c1955a0d511129cc643c8e3f41df9485af26a03abd1 */d/Myworld/.minecraft/versions/1.20.1-main/mods/[可点击的进度] clickadv-1.20.1-3.9.jar
+5d0a2bba205c5a62c66ea104dab1ee48fd29b7632cd5303cc59bbd2c2159c1c0 */d/Myworld/.minecraft/versions/1.20.1-main/mods/[可视化工作台] VisualWorkbench-v8.0.0-1.20.1-Forge.jar
+c90b96f049d92825c4a103721988c80d72e5ad380d17be46a0f53e114874c478 */d/Myworld/.minecraft/versions/1.20.1-main/mods/[夸克] Quark-4.0-462.jar
+9bea926d834e8dd84eb9cb74cb6954c9b88d16a341941a0caecf7cc6656ad586 */d/Myworld/.minecraft/versions/1.20.1-main/mods/[实体模型特性] entity_model_features_forge_1.20.1-2.4.1.jar
+1231bb17e3db1a7d4e98800bb070ec1e7e7c016b934e1eb11c1cc63d11d0aa2d */d/Myworld/.minecraft/versions/1.20.1-main/mods/[实体渲染机制优化] entityculling-forge-1.10.1-mc1.20.1.jar
+f4a4b89409c0f67a3eb3930e33334382b8166c5a90259a6e7fdf5df19c365c12 */d/Myworld/.minecraft/versions/1.20.1-main/mods/[实体纹理特性] entity_texture_features_forge_1.20.1-6.2.9.jar
+5d8cc8928ce480288d5b504663bb13104df56ac72ce5bf36f2743ec27c701112 */d/Myworld/.minecraft/versions/1.20.1-main/mods/[属性修复] AttributeFix-Forge-1.20.1-21.0.4.jar
+b77b1f84077a30d99986e090bd0e45b876a524dbee74a9633ae319373263b996 */d/Myworld/.minecraft/versions/1.20.1-main/mods/[幻想乡乐事 -- 妖怪们的飨宴] youkaisfeasts-0.4.8.jar
+284a9095dfde943ed97597a1e8f37aec0cff9f855e7ea5b66c18d1bdfa42ae24 */d/Myworld/.minecraft/versions/1.20.1-main/mods/[更多动画] notenoughanimations-forge-1.12.3-mc1.20.1.jar
+435e2bb57abfeb06817aa25932b96c9ffbff167af458b34c40c76874c44bfd4d */d/Myworld/.minecraft/versions/1.20.1-main/mods/[更好的模组列表] Better_Modlist-0.1.15-all.jar
+bb831568fab8dc23c50dcaee3f5ae2d9c1de0d2a7a20275f49001b6fc7a1586d */d/Myworld/.minecraft/versions/1.20.1-main/mods/[更真实的第一人称模型] firstperson-forge-2.7.1-mc1.20.1.jar
+3c6fa1367799a39c6744b863bf6763873805f95582c49ba691d77669d202644f */d/Myworld/.minecraft/versions/1.20.1-main/mods/[森罗物语：下界] kaleidoscope_nether-1.1.6-forge+mc1.20.1.jar
+3ec6d108709c8af0fa51fc333c55b12c3586c5db9be1e6b444c56117b429dd0e */d/Myworld/.minecraft/versions/1.20.1-main/mods/[森罗物语：兼容] kaleidoscope_compat-2.4.3-forge+mc1.20.1.jar
+eadc053c7fbab535637d899f5fc6f68fe0f9b2f70729f6d95c71410b3e4475fd */d/Myworld/.minecraft/versions/1.20.1-main/mods/[森罗物语：厨房] kaleidoscopecookery-1.2.1-forge+mc1.20.1.jar
+09015e531d03f4aaec2c69731e8f2d1eebeaa40589f23c49a85b45ba72c4ad92 */d/Myworld/.minecraft/versions/1.20.1-main/mods/[森罗物语：玩偶工坊] kaleidoscope_doll_workshop-1.0.4-forge+mc1.20.1.jar
+4c96cf0dd3363a8e15f9ef6b6bfc00ac7d4791e8e9eeebe19b8092c59e800f8f */d/Myworld/.minecraft/versions/1.20.1-main/mods/[水产业2／水产品2] Aquaculture-1.20.1-2.5.7.jar
+eae5e753536614fbcf968f3f11cae54779d07e8547199ea5800dbb17617bfeee */d/Myworld/.minecraft/versions/1.20.1-main/mods/[水产乐事] aquaculturedelight-1.1.1-forge-1.20.1.jar
+9ed8ada1283ed7a793a70cc1b51c4a340f367ce84707e1a7b8cf21ee3d288d77 */d/Myworld/.minecraft/versions/1.20.1-main/mods/[永恒枪械工坊：零] tacz-1.20.1-1.1.8-hotfix.jar
+2311790589a58678640cb788de13bebd40efe3ed92f03e82a8fa871850a382eb */d/Myworld/.minecraft/versions/1.20.1-main/mods/[沉浸农艺] letsdo-farm_and_charm-forge-1.0.14.jar
+99417b1342ba51ccb9611b17ab01fc1299971aa34e8f9d2a8b3c63df5713eb49 */d/Myworld/.minecraft/versions/1.20.1-main/mods/[物品过滤器] item-filters-forge-2001.1.0-build.59.jar
+8063f87bd0e2a4331fc4c27044591dbcef79edc9eff5fa589fbf7a6efcc28073 */d/Myworld/.minecraft/versions/1.20.1-main/mods/[物理声效重制版] sound-physics-remastered-forge-1.20.1-1.4.13.jar
+fed2211429301bf043864183cab9ab8e92d4cc4dbb9e488ce6c75217c54584a6 */d/Myworld/.minecraft/versions/1.20.1-main/mods/[犀牛] rhino-forge-2001.2.3-build.10.jar
+31949971a7a8d5a5bc95ad9d400cbedfd2d65ffbfb3cea7c0b2fa3b47431a0a5 */d/Myworld/.minecraft/versions/1.20.1-main/mods/[玉 🔍] Jade-1.20.1-Forge-11.13.2.jar
+49fea599522316ef7abd8897e8bcad3ed742d935f0a53726eba1f00c9ca8fe4c */d/Myworld/.minecraft/versions/1.20.1-main/mods/[现代化 UI] ModernUI-Forge-1.20.1-3.12.0.1-universal.jar
+ac56e372bfadee3250c14212653e6657f99ba15d9ac8ac29765ab2ce8cd77973 */d/Myworld/.minecraft/versions/1.20.1-main/mods/[现代化修复] modernfix-forge-5.27.0+mc1.20.1.jar
+ef7fa5096dfd492c3d3ae7228888ca4b92ce07d9b8e302297ceb2ceb1f8d238c */d/Myworld/.minecraft/versions/1.20.1-main/mods/[禁用聊天举报] NoChatReports-FORGE-1.20.1-v2.2.2.jar
+fe9eed0d9a1ccf181ae1fb45e4b819fee3d0e21342623a1eaaaff6b0b9aeff1c */d/Myworld/.minecraft/versions/1.20.1-main/mods/[稀有度核心] raritycore-1201.13.4.jar
+5b5574687edf1e14a1cfcc34a68526148b098219c098d9030bebfcf458393b9c */d/Myworld/.minecraft/versions/1.20.1-main/mods/[聊天动画] chatanimation-forge-1.3.0+mc1.20.1.jar
+68bec6d15bc7fce18dcc1b98a3c0d943e6697fcfbf9d7259db5156a7ea324556 */d/Myworld/.minecraft/versions/1.20.1-main/mods/[聊天头像] chat_heads-0.15.2-forge-1.20.jar
+447dd543e178a9454ccf3bf0d9d7bd7957b1af6da9d74f2cd3d9b5fbe8548e98 */d/Myworld/.minecraft/versions/1.20.1-main/mods/[脚步声Forge版] PresenceFootsteps-1.20.1-1.9.1-beta.1.jar
+cf581a8075f90e674b6690e1f4e85b5104894e4fec5eabe1356fb403055b05f0 */d/Myworld/.minecraft/versions/1.20.1-main/mods/[自定义NPC 非官方版] CustomNPCs-1.20.1-GBPort-Unofficial-20250429.jar
+dd59193804b778cf8d42284695b325d945150e4a973fb04e961fcd8b0c807b89 */d/Myworld/.minecraft/versions/1.20.1-main/mods/[自定义局域网联机] lanserverproperties-1.11.1-forge.jar
+56398103e0e3821c98f21a5b556d57deb0686b9f50868b4278ecb73cc9d2f42c */d/Myworld/.minecraft/versions/1.20.1-main/mods/[舒适用品] comforts-forge-6.4.0+1.20.1.jar
+e12419e43e3babc810af289403c5cd96bd7f09809b389acc6bb2f122b4b2a426 */d/Myworld/.minecraft/versions/1.20.1-main/mods/[苹果皮] appleskin-forge-mc1.20.1-2.5.1.jar
+6202d8241f01e21278fd5de644fd2e992824069f2cf0fc9dc6a74ab2218015b6 */d/Myworld/.minecraft/versions/1.20.1-main/mods/[落叶] fallingleaves-1.20.1-2.1.2.jar
+bd7f168ec56f14a25d36d9d0dc4d281e88f77b1ba678907b5c570e5c051a5ca4 */d/Myworld/.minecraft/versions/1.20.1-main/mods/[试验假人] dummmmmmy-1.20-2.0.12-forge.jar
+8c341567e57aa3c006f9fa85c7a5e3bc36a53b1cca4e3538c3db705eeeea1bbc */d/Myworld/.minecraft/versions/1.20.1-main/mods/[车万女仆] touhoulittlemaid-1.5.3-forge+mc1.20.1.jar
+ff33dd1f476447858300578508c5761d6ccfa27f91f46ba40f7fc16a33803629 */d/Myworld/.minecraft/versions/1.20.1-main/mods/[输入法冲突修复] IMBlocker-5.4.6.1-forge+1.17-1.20.4.jar
+05dceddd57825f911135c929504ef320b75953d05e7dc918dba58a0574e5315f */d/Myworld/.minecraft/versions/1.20.1-main/mods/[配置界面] configured-forge-1.20.1-2.2.3.jar
+d61acdac6509bae8e5a962876cb623d451fd625eb105a16e020d160de5635b25 */d/Myworld/.minecraft/versions/1.20.1-main/mods/[鈇] flerovium-forge-1.20.1-1.2.19-all.jar
+9c2c9396a49e796d88497758caa4637d2bcbb433c318e2dd9cebcffbaf0f6c54 */d/Myworld/.minecraft/versions/1.20.1-main/mods/[铁氧体磁芯] ferritecore-6.0.1-forge.jar
+c4f1b6bcbd2c4fd8c54866cc217f455d2e8262e35ac218f8fb628c79bc76ff8e */d/Myworld/.minecraft/versions/1.20.1-main/mods/[静谧四季／季节] SereneSeasons-forge-1.20.1-9.1.0.2.jar
+feb70544c3b8409122c26b9a80d86691c8e36508b95e24fe7bd89e3a973a947e */d/Myworld/.minecraft/versions/1.20.1-main/mods/[馥郁烘焙] letsdo-bakery-forge-2.0.6.jar
+60d4f0b0351d3d663c80127d3123546953f1de3255c2f59c458bc278617b1b6b */d/Myworld/.minecraft/versions/1.20.1-main/mods/[高清截图Fabric] fabrishot-1.10.1.jar
+6c27d16aa715ac6613a55fc463739e2c7b78279e4e4c4cede299e4a2d4a70f08 */d/Myworld/.minecraft/versions/1.20.1-main/mods/[鼠标手势] MouseTweaks-forge-mc1.20.1-2.25.1.jar
+218b471d0b8a1f6cda14cfc1beb9eeb0df54304500acc6c5613d9b88ec65d9af */d/Myworld/.minecraft/versions/1.20.1-main/mods/architectury-9.2.14-forge.jar
+1af076fa8f344cbc30a23bb2311d582b48c7e7d88848991db40c791cde9ee3f3 */d/Myworld/.minecraft/versions/1.20.1-main/mods/atomchat-Forge-1.20.1-0.4.0-windows-x64.jar
+ed964374effd0c196b01c0a5ed4f275fccecbc6c1f540bbafe44926ce5bcc4fe */d/Myworld/.minecraft/versions/1.20.1-main/mods/chloride-FORGE-mc1.20.1-v1.7.5.jar
+8ceb5eb471c6feb899c02a9d560917dcc460cd0cb0d6b77d3237889cffb7e1d9 */d/Myworld/.minecraft/versions/1.20.1-main/mods/citadel-2.6.1-1.20.1.jar
+1e895e85cf5b1e1905ef3178ec155c8badfe22a1577b92c09143a5aa1f4ce0f2 */d/Myworld/.minecraft/versions/1.20.1-main/mods/cloth-config-11.1.136-forge.jar
+11448808a42c17425cf2ea39701841008683d6ad6e2838a34eef0253251a870f */d/Myworld/.minecraft/versions/1.20.1-main/mods/coroutil-forge-1.20.1-1.3.7.jar
+e24e1d4c6ffbe8fca9b8da4aad14f3ea9b685b2830ddc33d67ab51aaea0c3d51 */d/Myworld/.minecraft/versions/1.20.1-main/mods/cupboard-1.20.1-3.9.jar
+1e817919a35b37cf30524aaec73f0ca5130452f23f168f844854df282eb8e51f */d/Myworld/.minecraft/versions/1.20.1-main/mods/curios-forge-5.14.1+1.20.1.jar
+eed3d1325f2acc2fd4e69bb495e5ccb91d962126ac5330f0582ebc2a3daf47fb */d/Myworld/.minecraft/versions/1.20.1-main/mods/embeddium-0.3.31+mc1.20.1.jar
+594a99f33268c8107e0f045c63dfd896dab6f52b73491716e812244ee4289a1c */d/Myworld/.minecraft/versions/1.20.1-main/mods/fgmplus-forge-1.20.1-1.6.1.jar
+0c29b9bab2ca7209a6cc8d80b2cd06daa4be2da81b636f7292cebebfaaea6c08 */d/Myworld/.minecraft/versions/1.20.1-main/mods/framework-forge-1.20.1-0.7.15.jar
+b7d5d19889c485a9746022fdc42f3297aa4d26014559ea0ed35fa7ba816b001d */d/Myworld/.minecraft/versions/1.20.1-main/mods/ftb-library-forge-2001.2.9.jar
+d39cd5d6b23b86468937e306776dc70faba900072c7e359ce9348d8a3c26982e */d/Myworld/.minecraft/versions/1.20.1-main/mods/fzzy_config-0.7.6+1.20.1+forge.jar
+477d5d014d6641522cd0deb93c66aefff755760259970c4c255fadb3d88ff702 */d/Myworld/.minecraft/versions/1.20.1-main/mods/geckolib-forge-1.20.1-4.8.3.jar
+374b9d30cf8e3fe9328855f6c15c4fb49f26ee933fa6ad3a030eed7195eff517 */d/Myworld/.minecraft/versions/1.20.1-main/mods/immersive_optimization-forge-1.20.1-0.1.5.jar
+ef988f86d170af499d147ea8a5c34c99dbd6d8f4a5ad236a4b43818dc4470a10 */d/Myworld/.minecraft/versions/1.20.1-main/mods/kotlinforforge-4.11.0-all.jar
+1769312192fbf9d72f45054ba61130523bfb471b5f480a4bff8c210ec09400bb */d/Myworld/.minecraft/versions/1.20.1-main/mods/kubejs-forge-2001.6.5-build.26.jar
+d08b99df112cfffb46e289635c79d4ac8397223320abd6469b47e202e23fa28c */d/Myworld/.minecraft/versions/1.20.1-main/mods/letsdo-API-forge-1.2.15-forge.jar
+f9baaed68b71775c9993ff0e386848eee39878d7fd462535c874d8bb68bae39e */d/Myworld/.minecraft/versions/1.20.1-main/mods/lios_overhauled_villages-0.1.1.jar
+eb1307a987f37498d3fbf59900f82865fa401ae044093668088c505f9faf5a08 */d/Myworld/.minecraft/versions/1.20.1-main/mods/loreite-Forge-1.20.1-0.1.0.jar
+35f27982242a3ea58c526204a28704ddf355d19bb2e9b0ff10f9585c255a4f16 */d/Myworld/.minecraft/versions/1.20.1-main/mods/modelfix-1.15.jar
+007c05ae799417ca7aa26669c5d97be9dface5b6fc27aca4ca8031cafe4ddd6e */d/Myworld/.minecraft/versions/1.20.1-main/mods/moonlight-1.20-2.16.34-forge.jar
+0945df0cba0f62b3901dd80c3268e5311b770ece78c78037a45db12ac0425fef */d/Myworld/.minecraft/versions/1.20.1-main/mods/oculus-mc1.20.1-1.8.0.jar
+1c249c30d3e50bba5cb35e0c3acebf4bd5f969bd33402de2f3a6a619fd688d12 */d/Myworld/.minecraft/versions/1.20.1-main/mods/owo-lib-0.11.2+1.20.jar
+bd4023e4618333f3e6020a7d6f4db3ae7e8fe41b39a43f47e6a1da4fbd80bc1b */d/Myworld/.minecraft/versions/1.20.1-main/mods/particle_core-0.3.3+1.20.1+forge.jar
+83f299dd33e5c6748a512bf1dd328338014d6c23b8b298651bbbc6529dc87bf6 */d/Myworld/.minecraft/versions/1.20.1-main/mods/pickupcard-Forge-1.20.1-0.2.5.jar
+90d9965cb9efdbda29fdc5610be3914cf7008bf5c392ff34f7ab25f96a852691 */d/Myworld/.minecraft/versions/1.20.1-main/mods/player-animation-lib-forge-1.0.2-rc1+1.20.jar
+3e6edbc721fbbca638044b0229a2ff0f683c612f590517c278b6998d85853375 */d/Myworld/.minecraft/versions/1.20.1-main/mods/sophisticatedbackpacks-1.20.1-3.26.3.2157.jar
+d9f02d479d49b2aeb606dfc0ff3bd43991229ca89c85585f9d3be9abf17a40cc */d/Myworld/.minecraft/versions/1.20.1-main/mods/sophisticatedcore-1.20.1-1.5.1.2335.jar
+1b02afc1bf83c44645d92a3ce01b3614443827e98a9874fe0e0d69e83987e181 */d/Myworld/.minecraft/versions/1.20.1-main/mods/sweatyfeet-Forge-1.20.1-0.1.9.jar
+94127701e6a1f2573e14c1b2a04eb9560f91aafd7c6cb0e1f17daf98d4e4854a */d/Myworld/.minecraft/versions/1.20.1-main/mods/tlm_sweatyfeet-Forge-1.20.1-0.1.1.jar
+19a7291187e1074dac0ade56f95cdb84936e8563c55afdc0b86c90ea7cd80a9e */d/Myworld/.minecraft/versions/1.20.1-main/mods/watut-forge-1.20.1-1.2.3.jar
+c10ed01385afa76b1b86fd6dbb89dced862bdce05e7372dd73c52523755eaca4 */d/Myworld/.minecraft/versions/1.20.1-main/mods/zergatul.freecam-2.0.1-forge-1.20.1.jar

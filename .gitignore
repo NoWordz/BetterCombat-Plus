@@ -1,0 +1,12 @@
+.gradle/
+build/
+run/
+logs/
+*.log
+.idea/
+*.iml
+.vscode/
+
+# 编译期前置 jar：Better Combat 是 All Rights Reserved，绝不随仓库分发。
+# 构建前按 NOTICE.md 的说明把三个 jar 放到 libs/。
+libs/

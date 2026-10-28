@@ -1,0 +1,9 @@
+{
+  "text.autoconfig.bettercombatplus.title": "更好的战斗 Plus",
+  "text.autoconfig.bettercombatplus.option.roll_during_attack": "攻击中允许翻滚",
+  "text.autoconfig.bettercombatplus.option.roll_during_attack.@Tooltip": "攻击动作尚未结束时也能翻滚。\n翻滚会作废正在起手的那一刀，但该次攻击仍然消耗武器冷却。",
+  "text.autoconfig.bettercombatplus.option.offhand_while_two_handed": "双手武器时保留副手",
+  "text.autoconfig.bettercombatplus.option.offhand_while_two_handed.@Tooltip": "手持双手武器时，副手物品仍然可见且可用。\n客户端与服务端必须一致。",
+  "text.autoconfig.bettercombatplus.option.right_click_in_recovery": "后摇期允许举盾",
+  "text.autoconfig.bettercombatplus.option.right_click_in_recovery.@Tooltip": "攻击后摇期间允许右键使用盾牌。\n蓄力期仍然让位给攻击。"
+}

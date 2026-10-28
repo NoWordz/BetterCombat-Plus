@@ -1,0 +1,9 @@
+{
+  "text.autoconfig.bettercombatplus.title": "Better Combat Plus",
+  "text.autoconfig.bettercombatplus.option.roll_during_attack": "Roll during attacks",
+  "text.autoconfig.bettercombatplus.option.roll_during_attack.@Tooltip": "Allow rolling while an attack is still playing.\nRolling voids the windup in progress, but that attack still consumes a weapon cooldown.",
+  "text.autoconfig.bettercombatplus.option.offhand_while_two_handed": "Keep offhand with two-handed weapons",
+  "text.autoconfig.bettercombatplus.option.offhand_while_two_handed.@Tooltip": "Keep the offhand item visible and usable while holding a two-handed weapon.\nMust match on client and server.",
+  "text.autoconfig.bettercombatplus.option.right_click_in_recovery": "Raise shield in recovery",
+  "text.autoconfig.bettercombatplus.option.right_click_in_recovery.@Tooltip": "Allow right-clicking a shield during the attack recovery window.\nThe windup phase still takes priority."
+}

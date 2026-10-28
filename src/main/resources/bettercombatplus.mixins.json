@@ -1,0 +1,18 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.e33epus.bcp.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "bettercombatplus.mixins.refmap.json",
+  "plugin": "com.e33epus.bcp.mixin.BcpMixinPlugin",
+  "mixins": [
+    "PlayerOffhandMixin"
+  ],
+  "client": [
+    "client.MinecraftRollMixin",
+    "client.MinecraftRecoveryUseMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
