@@ -8,6 +8,7 @@
 - 双手武器（镰刀、大剑、重斧、长枪等）时副手物品正常渲染与使用，盾牌不再消失。
 - 攻击后摇期可以右键举盾，蓄力期仍让位给攻击。
 - Cloth Config 配置界面，三个开关默认全开。
+- NeoForge 1.21.1 目标（`bettercombatplus-NeoForge-1.21.1-0.1.0.jar`），三处修复同版。**未实机验收**。
 
 **修复**
 
@@ -41,6 +42,7 @@
 - Offhand items render and work while wielding a two-handed weapon, shields no longer disappear.
 - Raise a shield during the attack recovery window; the windup phase still takes priority.
 - Cloth Config screen with three switches, all enabled by default.
+- NeoForge 1.21.1 target (`bettercombatplus-NeoForge-1.21.1-0.1.0.jar`) with all three fixes. **Not yet tested in game.**
 
 **Fixed**
 

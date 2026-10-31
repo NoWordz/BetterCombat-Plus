@@ -1,7 +1,9 @@
 # Better Combat Plus — 架构
 
 非官方附属，修 **Better Combat**（下称 BC）与 **Combat Roll**（下称 CR）组合下的三处手感缺陷。
-Forge 1.20.1 / Java 17。
+两个目标：**Forge 1.20.1 / Java 17**、**NeoForge 1.21.1 / Java 21**。
+仓库结构与两端差异见 [docs/repo-layout.md](docs/repo-layout.md) 与
+[docs/port-1.21.1-neoforge.md](docs/port-1.21.1-neoforge.md)。
 
 ## 一、为什么是附属而不是 fork
 
@@ -14,7 +16,8 @@ Forge 1.20.1 / Java 17。
 
 - 对 BC：只调用 `MinecraftClient_BetterCombat`、`WeaponRegistry`、`WeaponAttributes` 这几个公开类型；
   需要改变 BC 行为的地方，用**比 BC 更高优先级的 mixin 抢先返回**，让 BC 自己的注入没有机会执行。
-- 对 CR：调用其公开 API（`RollManager`、`Keybindings`、`EntityAttributes_CombatRoll`、`Packets`、`RollEffect`）。
+- 对 CR：调用其公开 API（`RollManager`、`Keybindings`、`CombatRoll.Attributes`（1.20.1 是
+  `EntityAttributes_CombatRoll`）、`Packets`、`RollEffect`）。
   唯一「重写」的是翻滚触发条件的**准入判断**，距离/方向/衰减算法照其实现重新表达；
   本 mod 同为 GPL-3.0，来源在 `NOTICE` 标注。
 
@@ -49,9 +52,12 @@ BC 的 `cancelWeaponSwing()` 不清 `upswingTicks`，下一 tick 归零时 `perf
 `two_handed` 时把 `getEquippedStack(OFFHAND)` 换成 `ItemStack.EMPTY`。这是 common mixin，
 **双端同时生效**，所以盾牌既画不出、也举不起（`getOffhandItem()` → `getItemBySlot(OFFHAND)`）。
 
-**修法**：`PlayerOffhandMixin` 以 priority 900（< BC 的 1000）在同一个 HEAD 抢先返回真实副手物品。
+**修法**：`PlayerOffhandMixin` 在同一个 HEAD 抢先返回真实副手物品。
 Mixin 官方对 `@Mixin.priority` 的定义是「lower priority mixins being applied first」，
 配合 inject-at-HEAD 的 first-come-first-served，数值更小者先执行。
+priority 必须**低于 BC 自己那个 mixin 的值**，而 BC 改过它：1.20.1 的 BC 1.9.0 不写 priority
+（默认 1000），我们用 900；1.21.1 的 BC 2.4.0 写了 899，我们用 800。
+照抄旧值就会后执行 —— BC 先 `setReturnValue(EMPTY)`，**副手修复静默失效**。
 
 > 注意：判定「BC 会不会封锁」必须直读 `Inventory`，不能用 `getOffhandItem()` ——
 > 后者的内部实现就是 `getItemBySlot(OFFHAND)`，而我们的代码就在 `getItemBySlot` 里，会无限递归。
@@ -129,22 +135,25 @@ com.e33epus.bcp
 - **硬依赖**：Better Combat（行为主体）、Cloth Config（配置界面）。
   Forge 1.20.1 没有**自动生成**配置界面（`ConfigurationScreen` 是 1.20.2+ 才有），
   所以和上游一样借 Cloth Config 生成，不手写 GUI。
-- **配置界面入口**：不需要任何入口 mod。Forge 打补丁后的 `TitleScreen` 自己建了
-  `fml.menu.mods` 按钮（`TitleScreen.lambda$init$1` → `new ModListScreen(this)`），
-  `ModListScreen.updateCache()` 用 `ConfigScreenHandler.getScreenFactoryFor(modInfo).isPresent()`
-  决定 Config 按钮是否可点。我们注册的 `ConfigScreenHandler.ConfigScreenFactory`
-  落在本 mod 自己的 `ModContainer.extensionPoints` 里（`ModLoadingContext.registerExtensionPoint`
-  → `getActiveContainer().registerExtensionPoint`），所以主菜单 Mods 里选中本 mod 即可打开。
+- **配置界面入口**：不需要任何入口 mod，两个加载器都是主菜单 Mods 里选中本 mod 即可打开。
+  Forge 1.20.1：打补丁后的 `TitleScreen` 自己建了 `fml.menu.mods` 按钮
+  （`TitleScreen.lambda$init$1` → `new ModListScreen(this)`），`ModListScreen.updateCache()`
+  用 `ConfigScreenHandler.getScreenFactoryFor(modInfo).isPresent()` 决定 Config 按钮是否可点，
+  我们注册的 `ConfigScreenHandler.ConfigScreenFactory` 落在本 mod 自己的
+  `ModContainer.extensionPoints` 里。NeoForge 1.21.1：同机制，扩展点换成
+  `IConfigScreenFactory`，经 `ModContainer.registerExtensionPoint` 注册。
 - **软依赖**：Combat Roll。没装时 `BcpMixinPlugin` 让 `MinecraftRollMixin` 整体不应用
   （用 `Class.forName` 探类，避免类加载期 `NoClassDefFoundError`），其余两项修复照常工作。
 - **部署面**：设计为双端都装。不做握手，也不写网络包。
 
 ## 五、验证
 
-- `./gradlew build` 通过；refmap 三个 SRG 目标已与 MCP 映射表、BC/CR 各自 refmap 交叉核对。
-- 产物部署至 `D:/Myworld/.minecraft/versions/1.20.1-main/mods`，哈希比对一致。
-- 实机验收已通过：双手武器时盾牌可见、后摇期右键能架盾、攻击动作中能翻滚；
+- 两端 `./gradlew build`（在各自 `platforms/<目标>/` 下）通过；1.20.1 的 refmap 三个 SRG 目标
+  已与 MCP 映射表、BC/CR 各自 refmap 交叉核对；1.21.1 无 SRG，字节码核对零 `f_`/`m_` 残留。
+- 1.20.1 实机验收已通过：双手武器时盾牌可见、后摇期右键能架盾、攻击动作中能翻滚；
   配置界面文字正常（`pack.mcmeta` 修好后语言文件加载）。
+- 1.21.1 **未实机验收**：构建 + 字节码核对通过，等待用户在 NeoForge 1.21.1 实例测试，
+  见 `docs/port-1.21.1-neoforge.md`。
 
 ## 六、已知边界
 

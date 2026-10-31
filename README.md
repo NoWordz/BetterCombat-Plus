@@ -2,7 +2,7 @@
 
 An **unofficial** addon for [Better Combat](https://modrinth.com/mod/better-combat) and
 [Combat Roll](https://modrinth.com/mod/combat-roll).
-Minecraft **1.20.1** · **Forge** · Java 17 · **GPL-3.0**
+**GPL-3.0** · Minecraft **1.20.1 Forge** and **1.21.1 NeoForge**
 
 Not affiliated with, or endorsed by, the authors of Better Combat or Combat Roll.
 
@@ -22,17 +22,18 @@ Not affiliated with, or endorsed by, the authors of Better Combat or Combat Roll
 
 ## Requirements
 
-| Mod | |
-|---|---|
-| Better Combat | **required** `[1.9.0,1.10)` |
-| Cloth Config | **required** `[11,)` |
-| Combat Roll | **optional** `[1.3.3,1.4)` — without it only the roll fix is disabled |
+| | 1.20.1 Forge | 1.21.1 NeoForge |
+|---|---|---|
+| Better Combat | **required** `[1.9.0,1.10)` | **required** `[2.4.0,2.5)` |
+| Cloth Config | **required** `[11,)` | **required** `[15,)` |
+| Combat Roll | **optional** `[1.3.3,1.4)` | **optional** `[2.0.6,2.1)` |
+| Java | 17 | 21 |
 
 Install on **both** client and server. The offhand fix is a common mixin that runs on each side; with one side missing it, the shield looks raised but blocks nothing.
 
 ## Configuration
 
-Main menu → **Mods** → Better Combat Plus → **Config**. Forge provides that entry point, so no extra menu mod is needed. All three switches default to on.
+Main menu → **Mods** → Better Combat Plus → **Config**. The loader provides that entry point, so no extra menu mod is needed. All three switches default to on.
 
 - `roll_during_attack` — allow rolling during an attack
 - `offhand_while_two_handed` — keep the offhand while wielding a two-handed weapon
@@ -40,15 +41,18 @@ Main menu → **Mods** → Better Combat Plus → **Config**. Forge provides tha
 
 `offhand_while_two_handed` is read from each side's own config, so keep both sides identical.
 
-A shield is recognised by any of: the Forge `SHIELD_BLOCK` capability, extending `ShieldItem`, or carrying the `#forge:tools/shields` tag. Shields added by other mods therefore work without changes.
+A shield is recognised by any of: the `SHIELD_BLOCK` item ability (what vanilla `isBlocking()` checks), extending `ShieldItem`, or carrying the loader's shield tag (`#forge:tools/shields` on 1.20.1, `#c:tools/shield` on 1.21.1). Shields added by other mods therefore work without changes.
 
 ## Build
 
+Each platform is an independent build with its own Gradle wrapper, because Java and Gradle versions are hard constraints.
+
 ```bash
-./gradlew build    # build/libs/bettercombatplus-Forge-1.20.1-<ver>.jar
+cd platforms/1.20.1-forge   && ./gradlew build    # Java 17
+cd platforms/1.21.1-neoforge && ./gradlew build   # Java 21
 ```
 
-Drop the three dependency jars into `libs/` first. They are compile-only and never shipped — see [NOTICE](NOTICE.md).
+Drop the three dependency jars into that platform's `libs/` first. They are compile-only and never shipped — see [NOTICE](NOTICE.md). Layout details in [docs/repo-layout.md](docs/repo-layout.md).
 
 ## Licence
 

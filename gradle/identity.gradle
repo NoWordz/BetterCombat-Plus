@@ -1,0 +1,42 @@
+// ============================================================
+//  仓库级身份装配（由各平台 build.gradle 在 plugins 块之后 apply）
+// ============================================================
+//
+// 每个平台目录都是一个独立构建（各自的 gradlew、各自的 Java/Gradle 版本），
+// 身份键只在仓库根那一份 gradle.properties 里。本脚本把它读进来挂到 project.ext，
+// 各平台自己不许定义这些键。
+//
+// 读不到就失败，不给默认值：悄悄退回默认值会让版本号静默漂移 ——
+// jar 照样出得来，只是对不上同一次改动。
+
+def repoRoot = file('../..').canonicalFile
+def propsFile = new File(repoRoot, 'gradle.properties')
+if (!propsFile.isFile()) {
+    throw new GradleException(
+            "找不到 ${propsFile.path}。\n" +
+            "仓库级身份（mod_id / mod_name / mod_version / …）只在仓库根那一份里，" +
+            "各平台不许自己定义。是不是把 platforms/<目标>/ 单独拷出来构建了？那样出来的 jar 版本号没有来源。")
+}
+
+def repoProps = new Properties()
+propsFile.withInputStream { repoProps.load(it) }
+
+['mod_id', 'mod_name', 'mod_license', 'mod_group_id', 'mod_authors', 'mod_description', 'mod_version'].each { k ->
+    if (!repoProps.containsKey(k)) {
+        throw new GradleException("仓库根 gradle.properties 缺 ${k} —— 各平台不提供默认值，读不到就失败")
+    }
+    def v = repoProps.getProperty(k)
+    if (v == null || v.isBlank()) {
+        // 空值不拦的话 jar 照样出，只是版本号从文件名和 mods.toml 里悄悄消失。
+        throw new GradleException("仓库根 gradle.properties 的 ${k} 是空的 —— 这是身份键，不许留空")
+    }
+    ext[k] = v
+}
+
+// 许可证与 NOTICE 是仓库级文件，随每个 Jar 打包（GPL-3.0 要求）。
+ext.repoRoot = repoRoot
+ext.licenseFile = new File(repoRoot, 'LICENSE')
+ext.noticeFile = new File(repoRoot, 'NOTICE.md')
+if (!licenseFile.isFile() || !noticeFile.isFile()) {
+    throw new GradleException("仓库根缺 LICENSE 或 NOTICE.md —— 这两个必须随二进制分发")
+}

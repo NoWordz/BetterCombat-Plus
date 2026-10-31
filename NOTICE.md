@@ -22,7 +22,8 @@ Copyright (c) 2022 Zsolt Molnár — https://github.com/ZsoltMolnarrr/BetterComb
 Copyright (c) Zsolt Molnár — https://github.com/ZsoltMolnarrr/CombatRoll
 
 本项目通过其公开 API 复用翻滚能力：`RollManager`、`Keybindings`、`RollEffect`、
-`Packets.RollPublish`、`EntityAttributes_CombatRoll`。
+`Packets.RollPublish`、`CombatRoll.Attributes`（1.20.1 上为 `EntityAttributes_CombatRoll`）。
+1.21.1 端另需 `Platform.networkC2S_Send` 作为 C2S 发包入口。
 
 `com.e33epus.bcp.compat.RollTrigger` 中的翻滚**准入条件**与**位移算法**
 （方向合成、`0.475 × (DISTANCE + additional_roll_distance)`、
@@ -31,11 +32,16 @@ Copyright (c) Zsolt Molnár — https://github.com/ZsoltMolnarrr/CombatRoll
 
 ## 编译期依赖
 
-`libs/` 下的 jar 仅用于编译，不随产物分发：
+各平台 `libs/` 下的 jar 仅用于编译，不随产物分发：
 
-- `bettercombat-forge-1.9.0+1.20.1.jar`（All Rights Reserved，未分发）
-- `combatroll-forge-1.3.3+1.20.1.jar`（GPL-3.0，未分发）
-- `cloth-config-11.1.136-forge.jar`（LGPL-3.0，未分发）
+| 文件 | 平台 | 许可 |
+|---|---|---|
+| `bettercombat-forge-1.9.0+1.20.1.jar` | 1.20.1 | All Rights Reserved，未分发 |
+| `combatroll-forge-1.3.3+1.20.1.jar` | 1.20.1 | GPL-3.0，未分发 |
+| `cloth-config-11.1.136-forge.jar` | 1.20.1 | LGPL-3.0，未分发 |
+| `bettercombat-neoforge-2.4.0+1.21.1.jar` | 1.21.1 | All Rights Reserved，未分发 |
+| `combat_roll-neoforge-2.0.6+1.21.1.jar` | 1.21.1 | GPL-3.0，未分发 |
+| `cloth-config-15.0.140-neoforge.jar` | 1.21.1 | LGPL-3.0，未分发 |
 
 ## 名称
 
@@ -45,10 +51,13 @@ Copyright (c) Zsolt Molnár — https://github.com/ZsoltMolnarrr/CombatRoll
 ## 构建前置 jar 的获取
 
 `libs/` 被 `.gitignore` 排除（Better Combat 是 All Rights Reserved，不能随仓库分发）。
-本地构建前放入以下三个文件：
+本地构建前把对应平台的 jar 放进 `platforms/<目标>/libs/`：
 
-| 文件 | 来源 |
-|---|---|
-| `bettercombat-forge-1.9.0+1.20.1.jar` | Modrinth `better-combat` 1.9.0+1.20.1 forge |
-| `combatroll-forge-1.3.3+1.20.1.jar` | Modrinth `combat-roll` 1.3.3+1.20.1 forge |
-| `cloth-config-11.1.136-forge.jar` | Modrinth `cloth-config` 11.1.136 forge |
+| 平台 | 文件 | Modrinth 项目 / 版本 |
+|---|---|---|
+| 1.20.1 | `bettercombat-forge-1.9.0+1.20.1.jar` | `better-combat` 1.9.0+1.20.1 (forge) |
+| 1.20.1 | `combatroll-forge-1.3.3+1.20.1.jar` | `combat-roll` 1.3.3+1.20.1 (forge) |
+| 1.20.1 | `cloth-config-11.1.136-forge.jar` | `cloth-config` 11.1.136 (forge) |
+| 1.21.1 | `bettercombat-neoforge-2.4.0+1.21.1.jar` | `better-combat` 2.4.0+1.21.1 (neoforge) |
+| 1.21.1 | `combat_roll-neoforge-2.0.6+1.21.1.jar` | `combat-roll` 2.0.6+1.21.1 (neoforge) |
+| 1.21.1 | `cloth-config-15.0.140-neoforge.jar` | `cloth-config` 15.0.140 (neoforge) |

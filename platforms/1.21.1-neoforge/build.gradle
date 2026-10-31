@@ -1,0 +1,115 @@
+plugins {
+    id 'java-library'
+    id 'idea'
+    id 'net.neoforged.moddev' version '2.0.141'
+}
+
+// 身份键（mod_id / mod_version / …）来自仓库根 gradle.properties；读不到直接失败。
+apply from: '../../gradle/identity.gradle'
+
+version = mod_version
+group = mod_group_id
+
+base {
+    archivesName = "${mod_id}-NeoForge-${minecraft_version}"
+}
+
+// MC 1.21.1 ships Java 21.
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+// 语言文件与图标两端逐字相同，放在 common/ 一份；pack.mcmeta 的 pack_format
+// 各版本不同（1.20.1=15，1.21.1=34），所以留在各平台自己目录里。
+sourceSets.main.resources.srcDir('../../common/resources')
+
+neoForge {
+    version = project.neo_version
+
+    parchment {
+        minecraftVersion = project.parchment_minecraft_version
+        mappingsVersion = project.parchment_mappings_version
+    }
+
+    runs {
+        client { client() }
+        server {
+            server()
+            programArgument '--nogui'
+        }
+        configureEach {
+            logLevel = org.slf4j.event.Level.DEBUG
+        }
+    }
+
+    mods {
+        "${mod_id}" {
+            sourceSet(sourceSets.main)
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+    // China mirrors last: fallback for local builds, canonical repos resolve first
+    maven { url 'https://mirrors.cloud.tencent.com/nexus/repository/maven-public/' }
+    maven { url 'https://maven.aliyun.com/repository/public/' }
+}
+
+dependencies {
+    // NeoForge 用官方名运行、没有 SRG，所以 mixin 不需要 refmap，
+    // 也就不需要 annotation processor —— 只要编译期能看到注解类型即可。
+    compileOnly 'org.spongepowered:mixin:0.8.7'
+
+    // 编译期只看不打包：三个前置在运行时由整合包提供（见 neoforge.mods.toml 的依赖声明）。
+    // Better Combat 是 All Rights Reserved，绝不进仓库也不进产物，构建前自行放入 libs/。
+    compileOnly files('libs/bettercombat-neoforge-2.4.0+1.21.1.jar')
+    compileOnly files('libs/cloth-config-15.0.140-neoforge.jar')
+    // Combat Roll 是软依赖：mixin 由 BcpMixinPlugin 在类存在时才应用。
+    compileOnly files('libs/combat_roll-neoforge-2.0.6+1.21.1.jar')
+}
+
+tasks.named('processResources', ProcessResources).configure {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    filteringCharset = 'UTF-8'
+    var replaceProperties = [
+            minecraft_version      : minecraft_version,
+            minecraft_version_range: minecraft_version_range,
+            neo_version            : neo_version,
+            neo_version_range      : neo_version_range,
+            loader_version_range   : loader_version_range,
+            mod_id                 : mod_id,
+            mod_name               : mod_name,
+            mod_license            : mod_license,
+            mod_version            : mod_version,
+            mod_authors            : mod_authors,
+            mod_description        : mod_description,
+    ]
+    inputs.properties replaceProperties
+    filesMatching(['META-INF/neoforge.mods.toml', 'pack.mcmeta']) {
+        expand replaceProperties
+    }
+}
+
+tasks.named('jar', Jar).configure {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    // GPL-3.0 要求随二进制分发许可证；NOTICE 说明上游关系与复用出处。
+    from(licenseFile) { into 'META-INF' }
+    from(noticeFile) { into 'META-INF' }
+    manifest {
+        attributes([
+                'Specification-Title'     : mod_id,
+                'Specification-Vendor'    : mod_authors,
+                'Specification-Version'   : '1',
+                'Implementation-Title'    : project.name,
+                'Implementation-Version'  : project.jar.archiveVersion,
+                'Implementation-Vendor'   : mod_authors,
+                'Implementation-Timestamp': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
+        ])
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+// NeoForge 用官方名运行、没有 SRG，所以这里没有 refmap 那一整套。
+// Mixin 配置在 META-INF/neoforge.mods.toml 的 [[mixins]] 里声明。

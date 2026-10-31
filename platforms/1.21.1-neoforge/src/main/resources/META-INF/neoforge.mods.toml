@@ -1,0 +1,55 @@
+modLoader="javafml"
+loaderVersion="${loader_version_range}"
+license="${mod_license}"
+
+[[mods]]
+modId="${mod_id}"
+version="${mod_version}"
+displayName="${mod_name}"
+authors="${mod_authors}"
+description='''${mod_description}'''
+logoFile="logo.png"
+issueTrackerURL="https://github.com/NoWordz/BetterCombat-Plus/issues"
+
+# Mixin 配置：NeoForge 用 toml 声明，不再走 MANIFEST.MF 的 MixinConfigs。
+[[mixins]]
+config="${mod_id}.mixins.json"
+
+[[dependencies.${mod_id}]]
+    modId="neoforge"
+    type="required"
+    versionRange="${neo_version_range}"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.${mod_id}]]
+    modId="minecraft"
+    type="required"
+    versionRange="${minecraft_version_range}"
+    ordering="NONE"
+    side="BOTH"
+
+# Better Combat 是硬依赖：两个副作用修复都建立在它的双手武器与起手/后摇状态之上。
+[[dependencies.${mod_id}]]
+    modId="bettercombat"
+    type="required"
+    versionRange="[2.4.0,2.5)"
+    ordering="AFTER"
+    side="BOTH"
+
+# Cloth Config 提供配置界面（上游 Better Combat 同样依赖它），手写配置界面没有必要。
+[[dependencies.${mod_id}]]
+    modId="cloth_config"
+    type="required"
+    versionRange="[15,)"
+    ordering="AFTER"
+    side="BOTH"
+
+# Combat Roll 是软依赖：只在装了它时才启用「攻击中翻滚」接管，没装时其余修复照常工作。
+# 注意 1.21.1 的 modId 是 combat_roll（1.20.1 是 combatroll）。
+[[dependencies.${mod_id}]]
+    modId="combat_roll"
+    type="optional"
+    versionRange="[2.0.6,2.1)"
+    ordering="AFTER"
+    side="BOTH"
