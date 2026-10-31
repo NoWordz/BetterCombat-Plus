@@ -9,6 +9,7 @@ displayName="${mod_name}"
 authors="${mod_authors}"
 description='''${mod_description}'''
 logoFile="logo.png"
+displayURL="https://github.com/NoWordz/BetterCombat-Plus"
 issueTrackerURL="https://github.com/NoWordz/BetterCombat-Plus/issues"
 
 [[dependencies.${mod_id}]]

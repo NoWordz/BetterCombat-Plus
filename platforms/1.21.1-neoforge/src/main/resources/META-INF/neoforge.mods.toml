@@ -9,6 +9,7 @@ displayName="${mod_name}"
 authors="${mod_authors}"
 description='''${mod_description}'''
 logoFile="logo.png"
+displayURL="https://github.com/NoWordz/BetterCombat-Plus"
 issueTrackerURL="https://github.com/NoWordz/BetterCombat-Plus/issues"
 
 # Mixin 配置：NeoForge 用 toml 声明，不再走 MANIFEST.MF 的 MixinConfigs。
